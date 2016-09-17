@@ -1,14 +1,15 @@
 package net.rocboronat.fastestdrawer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainPresenter {
 
   private final MainActivity activity;
+  private final InstalledAppsLoader installedAppsLoader;
 
-  public MainPresenter(MainActivity activity) {
+  public MainPresenter(MainActivity activity, InstalledAppsLoader installedAppsLoader) {
     this.activity = activity;
+    this.installedAppsLoader = installedAppsLoader;
   }
 
   public void onCreate() {
@@ -16,10 +17,7 @@ public class MainPresenter {
   }
 
   private void requestApps() {
-    List<App> apps = new ArrayList<>();
-    apps.add(new App("QuitNow!"));
-    apps.add(new App("Vicing"));
-    apps.add(new App("Car Station"));
-    activity.refreshApps(apps);
+    List<InstalledApp> installedApps = installedAppsLoader.getInstalledApps();
+    activity.refreshApps(installedApps);
   }
 }
